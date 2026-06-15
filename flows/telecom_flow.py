@@ -2,6 +2,11 @@ import os
 import pandas as pd
 from sqlalchemy import create_engine
 
+from sqlalchemy import create_engine
+
+engine = create_engine(
+    "mysql+pymysql://root:1234@mysql:3306/telecom_db"
+)
 # =========================
 # DATABASE CONNECTION
 # =========================
@@ -181,7 +186,7 @@ def load(df, engine):
 def run_pipeline():
     df = extract()
     df = transform(df)
-    load(df)
+    load(df, engine)   # ✅ FIXED
 
     print("🎉 Pipeline finished")
 
